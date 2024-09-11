@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:taskly/models/task.dart';
@@ -26,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
 
-    print("Input Value: $_newTaskContent");
+    // print("Input Value: $_newTaskContent");
 
     return Scaffold(
       appBar: AppBar(
