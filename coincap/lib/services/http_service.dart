@@ -6,21 +6,21 @@ class HttpService {
   final Dio dio = Dio();
 
   AppConfig? _appConfig;
-  String? _base_url;
+  String? base_url;
 
   HttpService() {
     _appConfig = GetIt.instance.get<AppConfig>();
-    _base_url = _appConfig!.COIN_API_BASE_URL;
+    base_url = _appConfig!.COIN_API_BASE_URL;
   }
 
-  Future<Response?> get(String _path) async { // `?` because of catch block
+  Future<Response?> get(String path) async { // `?` because of catch block
     try {
-      String _url = "$_base_url$_path";
+      String url = "$base_url$path";
       // `dio.get` properties
       // queryParameters: {"" : ""}
       // options: Options(headers: {"": ""})
-      Response _response = await dio.get(_url);
-      return _response;
+      Response response = await dio.get(url);
+      return response;
     } catch (e) {
       print("HTTPService: Unable to perform a get requrest.");
       print(e);

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:coincap/models/app_config.dart';
 import 'package:coincap/pages/home_page.dart';

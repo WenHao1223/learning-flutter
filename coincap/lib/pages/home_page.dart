@@ -19,10 +19,22 @@ class _HomePageState extends State<HomePage> {
 
   HttpService? _http;
 
+  String? selectedItem;
+  List<String> coins = [
+      "bitcoin",
+      "ethereum",
+      // "litecoin",
+      // "binancecoin"
+      "tether",
+      "cardano",
+      "ripple",
+    ];
+
   @override
   void initState() {
     super.initState();
     _http = GetIt.instance.get<HttpService>();
+    selectedItem = coins.first;
   }
 
   @override
@@ -48,7 +60,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _selectedCoinDropdown() {
-    List<String> coins = ["bitcoin"];
     List<DropdownMenuItem<String>> items = coins
         .map(
           (e) => DropdownMenuItem(
@@ -65,9 +76,13 @@ class _HomePageState extends State<HomePage> {
         )
         .toList();
     return DropdownButton(
-      value: coins.first,
+      value: selectedItem,
       items: items,
-      onChanged: (value) {},
+      onChanged: (dynamic value) {
+        setState(() {
+          selectedItem = value;
+        });
+      },
       dropdownColor: const Color.fromRGBO(83, 88, 206, 1.0),
       iconSize: 30,
       icon: const Icon(
@@ -79,8 +94,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _dataWidgets() {
+    print("_dataWidgets: selectedItem = $selectedItem");
     return FutureBuilder(
-      future: _http!.get("/coins/bitcoin"),
+      future: _http!.get("/coins/$selectedItem"),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           Map<String, dynamic> data = jsonDecode(snapshot.data.toString());
@@ -97,10 +113,10 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onDoubleTap: () {
                   Navigator.push(
-                    context, 
+                    context,
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return DetailsPage();
+                        return DetailsPage(data: data);
                       },
                     ),
                   );
