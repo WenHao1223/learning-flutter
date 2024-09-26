@@ -12,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // to ensure that the Flutter framework is properly initialized before any other code runs
   await loadConfig();
   registerHTTPService();
+  await GetIt.instance.get<HttpService>().get("/coins/bitcoin");
   runApp(const MyApp());
 }
 

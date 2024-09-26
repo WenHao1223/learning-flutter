@@ -12,4 +12,18 @@ class HttpService {
     _appConfig = GetIt.instance.get<AppConfig>();
     _base_url = _appConfig!.COIN_API_BASE_URL;
   }
+
+  Future<Response?> get(String _path) async { // `?` because of catch block
+    try {
+      String _url = "$_base_url$_path";
+      // `dio.get` properties
+      // queryParameters: {"" : ""}
+      // options: Options(headers: {"": ""})
+      Response _response = await dio.get(_url);
+      return _response;
+    } catch (e) {
+      print("HTTPService: Unable to perform a get requrest.");
+      print(e);
+    }
+  }
 }
