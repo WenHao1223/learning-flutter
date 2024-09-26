@@ -6,16 +6,16 @@ class HttpService {
   final Dio dio = Dio();
 
   AppConfig? _appConfig;
-  String? base_url;
+  String? baseUrl;
 
   HttpService() {
     _appConfig = GetIt.instance.get<AppConfig>();
-    base_url = _appConfig!.COIN_API_BASE_URL;
+    baseUrl = _appConfig!.COIN_API_BASE_URL;
   }
 
   Future<Response?> get(String path) async { // `?` because of catch block
     try {
-      String url = "$base_url$path";
+      String url = "$baseUrl$path";
       // `dio.get` properties
       // queryParameters: {"" : ""}
       // options: Options(headers: {"": ""})

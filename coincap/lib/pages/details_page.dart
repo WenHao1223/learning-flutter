@@ -18,7 +18,7 @@ class DetailsPage extends StatelessWidget {
     print(conversionDataMap);
 
     List<MapEntry<String, dynamic>> conversionDataList =
-        conversionDataMap.entries.toList();
+        conversionDataMap.entries.toList(); 
 
     return ListView.builder(
       itemCount: conversionDataMap.length,
