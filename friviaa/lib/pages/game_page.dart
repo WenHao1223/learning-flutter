@@ -3,7 +3,9 @@ import 'package:friviaa/providers/game_page_provider.dart';
 import 'package:provider/provider.dart';
 
 class GamePage extends StatefulWidget {
-  const GamePage({super.key});
+  String? level;
+
+  GamePage({super.key, required this.level});
 
   @override
   State<StatefulWidget> createState() {
@@ -22,7 +24,7 @@ class _GamePageState extends State<GamePage> {
     _deviceHeight = MediaQuery.of(context).size.height;
 
     return ChangeNotifierProvider(
-      create: (context) => GamePageProvider(context: context),
+      create: (context) => GamePageProvider(context: context, level: widget.level),
       child: _buildUI(),
     );
   }

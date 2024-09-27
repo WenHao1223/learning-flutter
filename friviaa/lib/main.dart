@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromRGBO(31, 31, 31, 1.0),
         useMaterial3: false,
       ),
-      // home: const GamePage(),
       home: const HomePage(),
     );
   }

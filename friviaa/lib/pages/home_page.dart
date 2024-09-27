@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friviaa/pages/game_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double? _deviceHeight, _deviceWidth;
   double _sliderValue = 0;
-  List<String> level = ["Easy", "Medium", "Difficult"];
+  List<String> level = ["Easy", "Medium", "Hard"];
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,18 @@ class _HomePageState extends State<HomePage> {
 
   Widget _startButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return GamePage(
+                level: level[_sliderValue.toInt()],
+              );
+            },
+          ),
+        );
+      },
       color: Colors.blue,
       minWidth: _deviceWidth! * 0.80,
       height: _deviceHeight! * 0.10,
