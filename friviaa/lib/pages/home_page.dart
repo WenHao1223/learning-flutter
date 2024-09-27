@@ -20,21 +20,27 @@ class _HomePageState extends State<HomePage> {
     _deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        body: SafeArea(
-      child: _homeUI(),
-    ));
+      body: SafeArea(
+        child: _homeUI(),
+      ),
+    );
   }
 
   Widget _homeUI() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _appTitle(),
-        _sliderLevel(),
-        _startButton(),
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: _deviceWidth! * 0.1,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _appTitle(),
+          _sliderLevel(),
+          _startButton(),
+        ],
+      ),
     );
   }
 
