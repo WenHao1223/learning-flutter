@@ -8,6 +8,7 @@ class GamePageProvider extends ChangeNotifier {
   final Dio dio = Dio();
   final maxQuestions = 10;
   int currentQuestionCount = 0;
+  int correctQuestionCount = 0;
 
   List? questions;
 
@@ -38,6 +39,7 @@ class GamePageProvider extends ChangeNotifier {
   void answerQuestion(String answer) async {
     bool isCorrect =
         questions![currentQuestionCount]["correct_answer"] == answer;
+    if (isCorrect) correctQuestionCount++;
     currentQuestionCount++;
     showDialog(
       context: context,
@@ -53,7 +55,7 @@ class GamePageProvider extends ChangeNotifier {
     );
     await Future.delayed(const Duration(seconds: 1));
     Navigator.pop(context);
-    if(currentQuestionCount == maxQuestions) {
+    if (currentQuestionCount == maxQuestions) {
       endGame();
     } else {
       notifyListeners(); // rebuild ui with next question
@@ -64,16 +66,21 @@ class GamePageProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const AlertDialog(
+        return AlertDialog(
           backgroundColor: Colors.blue,
-          title: Text(
+          title: const Text(
             "End Game!",
             style: TextStyle(
               fontSize: 25,
               color: Colors.white,
             ),
           ),
-          content: Text("Score: 0/0"),
+          content: Text(
+            "Score: $correctQuestionCount/$maxQuestions",
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
         );
       },
     );
@@ -81,5 +88,6 @@ class GamePageProvider extends ChangeNotifier {
     Navigator.pop(context); // remove alert
     Navigator.pop(context); // go back to main page
     currentQuestionCount = 0;
+    correctQuestionCount = 0;
   }
 }
