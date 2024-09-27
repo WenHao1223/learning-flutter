@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friviaa/providers/game_page_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class GamePage extends StatefulWidget {
   String? level;
@@ -17,6 +18,7 @@ class _GamePageState extends State<GamePage> {
   double? _deviceHeight, _deviceWidth;
 
   GamePageProvider? _pageProvider;
+  final HtmlUnescape unescape = HtmlUnescape();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class _GamePageState extends State<GamePage> {
 
   Widget _questionText() {
     return Text(
-      _pageProvider!.getCurrentQuestionText(),
+      unescape.convert(_pageProvider!.getCurrentQuestionText()),
       style: const TextStyle(
         color: Colors.white,
         fontSize: 25,
