@@ -16,12 +16,12 @@ void main() async {
 }
 
 Future<void> loadConfig () async {
-  String _configContent = await rootBundle.loadString("assets/config/main.json"); // provides access to the application's assets, such as images, text files, and other resources
-  Map _configData = jsonDecode(_configContent);
+  String configContent = await rootBundle.loadString("assets/config/main.json"); // provides access to the application's assets, such as images, text files, and other resources
+  Map configData = jsonDecode(configContent);
   // `GetIt` - register and retrieve instances of classes
   // `registerSingleton` - ensures that only one instance of the class exists throughout the application's lifecycle
   GetIt.instance.registerSingleton<AppConfig>(
-    AppConfig(COIN_API_BASE_URL: _configData["COIN_API_BASE_URL"])
+    AppConfig(COIN_API_BASE_URL: configData["COIN_API_BASE_URL"])
   );
 }
 

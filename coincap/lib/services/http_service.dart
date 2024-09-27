@@ -25,5 +25,6 @@ class HttpService {
       print("HTTPService: Unable to perform a get requrest.");
       print(e);
     }
+    return null;
   }
 }

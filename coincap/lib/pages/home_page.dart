@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  Widget _descriptionCardWidget(String _description) {
+  Widget _descriptionCardWidget(String description) {
     return Container(
         height: _deviceHeight! * 0.45,
         width: _deviceWidth! * 0.90,
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
         ),
         color: const Color.fromRGBO(83, 86, 206, 0.5),
         child: Text(
-          _description,
+          description,
           style: const TextStyle(
             color: Colors.white,
           ),
