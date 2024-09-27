@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double? _deviceHeight, _deviceWidth;
   double _sliderValue = 0;
-  List<String> level = ["Easy", "Medium", "Hard"];
+  final List<String> level = ["Easy", "Medium", "Hard"];
 
   @override
   Widget build(BuildContext context) {
