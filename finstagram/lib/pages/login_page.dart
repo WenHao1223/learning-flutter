@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _LoginPageState();
@@ -64,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             _emailTextField(),
             _passwordTextField(),
+            _registerPageLink(),
           ],
         ),
       ),
@@ -81,38 +84,67 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       validator: (value) {
-        bool result = value!.contains(RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"));
-        result ? null : "Please enter a valid email";
+        bool result = value!.contains(
+            RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"));
+        return result ? null : "Please enter a valid email";
       },
     );
   }
 
   Widget _passwordTextField() {
     return TextFormField(
-      obscureText: true,
-      decoration: const InputDecoration(
-        hintText: "Password...",
-      ),
-      onSaved: (value) {
-        setState(() {
-          password = value;
-        });
-      },
-      validator: (value) => value!.length > 6 ? null : "Please enter a password greater than 6 characters."
-    );
+        obscureText: true,
+        decoration: const InputDecoration(
+          hintText: "Password...",
+        ),
+        onSaved: (value) {
+          setState(() {
+            password = value;
+          });
+        },
+        validator: (value) => value!.length > 6
+            ? null
+            : "Please enter a password greater than 6 characters.");
   }
 
   Widget _loginButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: _loginUser,
       minWidth: _deviceWidth! * 0.70,
       height: _deviceHeight! * 0.06,
       color: Colors.red,
       child: const Text(
         "Login",
         style: TextStyle(
-            color: Colors.white, fontSize: 25, fontWeight: FontWeight.w600),
+          color: Colors.white,
+          fontSize: 25,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
+  }
+
+  Widget _registerPageLink() {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        "register",
+      ),
+      child: const Text(
+        "Don't have an account?",
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 15,
+          fontWeight: FontWeight.w200,
+        ),
+      ),
+    );
+  }
+
+  void _loginUser() {
+    print(_loginFormKey.currentState!.validate());
+    if (_loginFormKey.currentState!.validate()) {
+      _loginFormKey.currentState!.save();
+    }
   }
 }
