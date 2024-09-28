@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) {
         bool result = value!.contains(
             RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"));
-        return result ? null : "Please enter a valid email";
+        return result ? null : "Please enter a valid email.";
       },
     );
   }

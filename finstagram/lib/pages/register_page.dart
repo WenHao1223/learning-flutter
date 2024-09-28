@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
       decoration: const InputDecoration(
         hintText: "Name...",
       ),
-      validator: (value) => value!.isNotEmpty ? null : "Please enter a name",
+      validator: (value) => value!.isNotEmpty ? null : "Please enter a name.",
       onSaved: (value) {
         setState(() {
           name = value;
@@ -134,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
       validator: (value) {
         bool result = value!.contains(
             RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"));
-        return result ? null : "Please enter a valid email";
+        return result ? null : "Please enter a valid email.";
       },
     );
   }
@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _registerButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: _registerUser,
       minWidth: _deviceWidth! * 0.50,
       height: _deviceHeight! * 0.05,
       color: Colors.red,
@@ -170,5 +170,12 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void _registerUser () {
+    if (_registerFormKey.currentState!.validate() && image != null) {
+      _registerFormKey.currentState!.save();
+      print("All information are validated.");
+    }
   }
 }
