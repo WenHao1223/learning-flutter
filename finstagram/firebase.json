@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "finstagram-908cd",
+          "appId": "1:629603594945:android:7cd9d0fc4844d1dfeb5a40",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "finstagram-908cd",
+          "configurations": {
+            "android": "1:629603594945:android:7cd9d0fc4844d1dfeb5a40",
+            "ios": "1:629603594945:ios:7219f3ed7c5bfefdeb5a40",
+            "macos": "1:629603594945:ios:7219f3ed7c5bfefdeb5a40",
+            "web": "1:629603594945:web:531ae3276c5550e7eb5a40",
+            "windows": "1:629603594945:web:557b1c1eeb650904eb5a40"
+          }
+        }
+      }
+    }
+  }
+}

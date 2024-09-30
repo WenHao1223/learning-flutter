@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:finstagram/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:get_it/get_it.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,6 +17,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   double? _deviceHeight, _deviceWidth;
 
+  FirebaseService? firebaseService;
+
   final GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
   String? name, email, password;
   File? image;
@@ -22,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
+    firebaseService = GetIt.instance.get<FirebaseService>();
   }
 
   @override
@@ -172,10 +177,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _registerUser () {
+  void _registerUser() async {
     if (_registerFormKey.currentState!.validate() && image != null) {
       _registerFormKey.currentState!.save();
-      print("All information are validated.");
+      bool result = await firebaseService!.registerUser(
+          name: name!, email: email!, password: password!, image: image!);
+      if (result) {
+        Navigator.pop(context); // go back to login page
+      }
     }
   }
 }
