@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:imbi/pages/main_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
