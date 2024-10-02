@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'dart:developer' as developer;
 
 import 'package:flutter/cupertino.dart';
 import 'package:imbi/pages/main_page.dart';
+import 'package:imbi/utils/calculator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:imbi/widgets/info_card.dart';
 
@@ -81,6 +83,7 @@ class _BmiPageState extends State<BmiPage> {
               SizedBox(
                 width: 50,
                 child: CupertinoDialogAction(
+                  key: const Key("age_minus"),
                   onPressed: () {
                     setState(() {
                       _age--;
@@ -98,6 +101,7 @@ class _BmiPageState extends State<BmiPage> {
               SizedBox(
                 width: 50,
                 child: CupertinoDialogAction(
+                  key: const Key("age_plus"),
                   onPressed: () {
                     setState(() {
                       _age++;
@@ -150,6 +154,7 @@ class _BmiPageState extends State<BmiPage> {
               SizedBox(
                 width: 50,
                 child: CupertinoDialogAction(
+                  key: const Key("weight_minus"),
                   onPressed: () {
                     setState(() {
                       _weight--;
@@ -167,6 +172,7 @@ class _BmiPageState extends State<BmiPage> {
               SizedBox(
                 width: 50,
                 child: CupertinoDialogAction(
+                  key: const Key("weight_plus"),
                   onPressed: () {
                     setState(() {
                       _weight++;
@@ -190,9 +196,12 @@ class _BmiPageState extends State<BmiPage> {
 
   Widget _heightSelectContainer() {
     return InfoCard(
-      height: _deviceHeight! * 0.15,
+      height: _deviceHeight! * 0.18,
       width: _deviceWidth! * 0.90,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             "Height in",
@@ -267,8 +276,8 @@ class _BmiPageState extends State<BmiPage> {
         child: const Text("Calculate BMI"),
         onPressed: () {
           if (_height > 0 && _weight > 0 && _age > 0) {
-            double _bmi = 703 * _weight / pow(_height, 2);
-            _showResultDialog(_bmi);
+            double bmi = calculateBMI(_height, _weight);
+            _showResultDialog(bmi);
           }
         },
       ),
@@ -329,6 +338,6 @@ class _BmiPageState extends State<BmiPage> {
       "bmi_data",
       <String>[bmi, status],
     );
-    print("BMI Result saved!");
+    developer.log("\x1B[32mBMI Result saved\x1B[0m");
   }
 }
